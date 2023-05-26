@@ -1,0 +1,61 @@
+{
+	"name": "test item",
+	"description": "test item description",
+	"tags": ["for testing purpose", "development"],
+	"thumbnail_src": "none",
+	"option": [
+		{
+			"name": "level of pain",
+			"choice": [
+				{
+					"label": "level 1",
+					"modifier": 0
+				},
+				{
+					"label": "level 2",
+					"modifier": 1
+				},
+				{
+					"label": "level 3",
+					"modifier": 2
+				}
+			]
+		},
+		{
+			"name": "level of blood",
+			"choice": [
+				{
+					"label": "level 1",
+					"modifier": 0
+				},
+				{
+					"label": "level 2",
+					"modifier": 1
+				},
+				{
+					"label": "level 3",
+					"modifier": 2
+				},
+				{
+					"label": "level 4",
+					"modifier": 3
+				},
+				{
+					"label": "level 5",
+					"modifier": 4
+				}
+			]
+		}
+	],
+	"additional": [
+		{
+			"name": "control 1",
+			"modifier": 1
+		},
+		{
+			"name": "control 2",
+			"modifier": 2
+		}
+	],
+	"base_price": 10
+}
