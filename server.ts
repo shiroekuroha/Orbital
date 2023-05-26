@@ -22,10 +22,12 @@ app.get("/", (req, res) => {
 
 app.get("/testing/:item", (req, res) => {
 	console.log(req.params.item);
+	res.send("Testing Message");
 });
 
 app.get("/testing", (req, res) => {
 	console.log(req.query);
+	res.send("Testing Message");
 });
 
 // Queue Entries from DB
