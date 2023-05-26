@@ -13,7 +13,12 @@ import {
 
 const app = express();
 
-app.use(cors());
+var cors_options = {
+	origin: 'https://tame-jade-kingfisher-tux.cyclic.app',
+	optionsSuccessStatus: 200
+}
+
+app.use(cors(cors_options));
 app.use(express.json());
 
 app.get("/", (req, res) => {
