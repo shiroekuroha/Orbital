@@ -14,7 +14,8 @@ import {
 const app = express();
 
 var cors_options = {
-	origin: 'https://tame-jade-kingfisher-tux.cyclic.app',
+//	origin: 'https://tame-jade-kingfisher-tux.cyclic.app',
+	origin: '*',
 	optionsSuccessStatus: 200
 }
 

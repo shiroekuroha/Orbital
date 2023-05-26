@@ -8,7 +8,8 @@ const cors_1 = __importDefault(require("cors"));
 const db_1 = require("./services/db");
 const app = (0, express_1.default)();
 var cors_options = {
-    origin: 'https://tame-jade-kingfisher-tux.cyclic.app',
+    //	origin: 'https://tame-jade-kingfisher-tux.cyclic.app',
+    origin: '*',
     optionsSuccessStatus: 200
 };
 app.use((0, cors_1.default)(cors_options));
