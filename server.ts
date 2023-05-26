@@ -1,6 +1,15 @@
 import express, { NextFunction } from "express";
 import cors from "cors";
-import { run, Entry, addEntry, getEntry, removeEntry, updateEntry, getAllEntries, EntryListOptions } from "./services/db";
+import {
+	run,
+	Entry,
+	addEntry,
+	getEntry,
+	removeEntry,
+	updateEntry,
+	getAllEntries,
+	EntryListOptions,
+} from "./services/db";
 
 const app = express();
 
@@ -19,23 +28,26 @@ app.get("/testing", (req, res) => {
 	console.log(req.query);
 });
 
-
 // Queue Entries from DB
 app.get("/api/item/all", (req, res) => {
-	let limit: number = req.query.limit? Number.parseInt(req.query.limit.toString()): 10;
-	let skip: number = req.query.skip? Number.parseInt(req.query.skip.toString()): 0;
+	let limit: number = req.query.limit
+		? Number.parseInt(req.query.limit.toString())
+		: 10;
+	let skip: number = req.query.skip
+		? Number.parseInt(req.query.skip.toString())
+		: 0;
 
 	let options: EntryListOptions = {
 		limit: limit,
 		skip: skip,
-		filter: null
+		filter: null,
 	};
 
 	getAllEntries(options).then((result) => {
 		console.log(result);
 		res.status(200).send(result);
-	})
-})
+	});
+});
 
 // Search Entry from DB
 app.get("/api/item/:id", (req, res) => {
@@ -71,11 +83,10 @@ app.delete("/api/item/:id", (req, res) => {
 	} else {
 		removeEntry(req.params.id).then((result) => {
 			console.log(result);
-			res.send({message: result});
+			res.send({ message: result });
 		});
 	}
 });
-
 
 // Update Entry in DB
 app.post("/api/item/:id", (req, res) => {
@@ -96,14 +107,15 @@ app.post("/api/item/:id", (req, res) => {
 	}
 });
 
-app.listen(3000, () => {
-	console.log("Server starting!");
-
-	run().catch((error: string) => {
-		console.log(error);
-		throw "Shit";
+run()
+	.then((good) => {
+		app.listen(3000, () => {
+			console.log("Server starting!");
+		});
+	})
+	.catch((bad) => {
+		console.log(bad);
 	});
-});
 
 const test: Entry = {
 	name: "test item",
