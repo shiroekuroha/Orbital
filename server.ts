@@ -116,6 +116,7 @@ run()
 		});
 	})
 	.catch((bad) => {
+		console.log("Bad Start, Need fixes!");
 		console.log(bad);
 	});
 
