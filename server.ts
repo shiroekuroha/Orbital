@@ -9,6 +9,7 @@ import {
 	updateEntry,
 	getAllEntries,
 	EntryListOptions,
+	getNumberOfEntries,
 } from "./services/db";
 
 const app = express();
@@ -35,6 +36,13 @@ app.get("/testing", (req, res) => {
 	console.log(req.query);
 	res.send("Testing Message");
 });
+
+// Get Collection count
+app.get("/api/item/count", (req, res) => {
+	getNumberOfEntries().then((result) => {
+		res.status(200).send(result);
+	});
+})
 
 // Queue Entries from DB
 app.get("/api/item/all", (req, res) => {

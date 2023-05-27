@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateEntry = exports.removeEntry = exports.addEntry = exports.getEntry = exports.dropAllEntries = exports.getAllEntries = exports.end_server = exports.run = void 0;
+exports.updateEntry = exports.removeEntry = exports.addEntry = exports.getEntry = exports.dropAllEntries = exports.getAllEntries = exports.getNumberOfEntries = exports.end_server = exports.run = void 0;
 const mongodb_1 = require("mongodb");
 const uri = process.env.DB_CONN_URL ? process.env.DB_CONN_URL : "mongodb+srv://admin:admin123@glass-edge.hqmedfc.mongodb.net/?retryWrites=true&w=majority";
 const client = new mongodb_1.MongoClient(uri, {
@@ -25,6 +25,17 @@ function end_server() {
     client.close();
 }
 exports.end_server = end_server;
+async function getNumberOfEntries() {
+    return new Promise((resolve, reject) => {
+        client
+            .db("development")
+            .collection("item")
+            .countDocuments({}).then((result) => {
+            resolve(result);
+        });
+    });
+}
+exports.getNumberOfEntries = getNumberOfEntries;
 // * Testing
 async function getAllEntries(options) {
     return new Promise(async (resolve, reject) => {

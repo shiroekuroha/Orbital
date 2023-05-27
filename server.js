@@ -25,6 +25,12 @@ app.get("/testing", (req, res) => {
     console.log(req.query);
     res.send("Testing Message");
 });
+// Get Collection count
+app.get("/api/item/count", (req, res) => {
+    (0, db_1.getNumberOfEntries)().then((result) => {
+        res.status(200).send(result);
+    });
+});
 // Queue Entries from DB
 app.get("/api/item/all", (req, res) => {
     let limit = req.query.limit

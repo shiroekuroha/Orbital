@@ -68,6 +68,19 @@ export interface EntryListOptions {
 	filter: any | null; // Filter entries
 }
 
+export async function getNumberOfEntries() {
+	return new Promise<number>((resolve, reject) => {
+		client
+			.db("development")
+			.collection("item")
+			.countDocuments({}).then(
+				(result) => {
+					resolve(result);
+				}
+			)
+	})
+}
+
 // * Testing
 export async function getAllEntries(options: EntryListOptions) {
 	return new Promise<Entry[]>(async (resolve, reject) => {
