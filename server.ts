@@ -15,34 +15,32 @@ import {
 const app = express();
 
 var cors_options = {
-//	origin: 'https://tame-jade-kingfisher-tux.cyclic.app',
-	origin: '*',
-	optionsSuccessStatus: 200
-}
+	//	origin: 'https://tame-jade-kingfisher-tux.cyclic.app',
+	origin: "*",
+	optionsSuccessStatus: 200,
+};
 
 app.use(cors(cors_options));
 app.use(express.json());
 
 app.get("/", (req, res) => {
-	res.send("Fuck You!");
+	res.status(200).send("Fuck You!");
 });
 
 app.get("/testing/:item", (req, res) => {
-	console.log(req.params.item);
-	res.send("Testing Message");
+	res.status(200).send("Testing Message");
 });
 
 app.get("/testing", (req, res) => {
-	console.log(req.query);
-	res.send("Testing Message");
+	res.status(200).send("Testing Message");
 });
 
 // Get Collection count
 app.get("/api/item/count", (req, res) => {
 	getNumberOfEntries().then((result) => {
-		res.status(200).send(result);
+		res.status(200).send({count: result});
 	});
-})
+});
 
 // Queue Entries from DB
 app.get("/api/item/all", (req, res) => {
@@ -60,7 +58,6 @@ app.get("/api/item/all", (req, res) => {
 	};
 
 	getAllEntries(options).then((result) => {
-		console.log(result);
 		res.status(200).send(result);
 	});
 });
@@ -85,8 +82,7 @@ app.get("/api/item/:id", (req, res) => {
 // Add Entry to DB
 app.put("/api/item", (req, res) => {
 	addEntry(req.body).then((result) => {
-		res.status(201);
-		res.send(result);
+		res.status(201).send(result);
 	});
 });
 
@@ -98,8 +94,7 @@ app.delete("/api/item/:id", (req, res) => {
 		);
 	} else {
 		removeEntry(req.params.id).then((result) => {
-			console.log(result);
-			res.send({ message: result });
+			res.status(200).send({ message: result });
 		});
 	}
 });
@@ -133,66 +128,3 @@ run()
 		console.log("Bad Start, Need fixes!");
 		console.log(bad);
 	});
-
-const test: Entry = {
-	name: "test item",
-	description: "test item description",
-	tags: ["for testing purpose", "development"],
-	linkage: [],
-	thumbnail_src: "none",
-	option: [
-		{
-			name: "level of pain",
-			choice: [
-				{
-					label: "level 1",
-					modifier: 0,
-				},
-				{
-					label: "level 2",
-					modifier: 1,
-				},
-				{
-					label: "level 3",
-					modifier: 2,
-				},
-			],
-		},
-		{
-			name: "level of blood",
-			choice: [
-				{
-					label: "level 1",
-					modifier: 0,
-				},
-				{
-					label: "level 2",
-					modifier: 1,
-				},
-				{
-					label: "level 3",
-					modifier: 2,
-				},
-				{
-					label: "level 4",
-					modifier: 3,
-				},
-				{
-					label: "level 5",
-					modifier: 4,
-				},
-			],
-		},
-	],
-	additional: [
-		{
-			name: "control 1",
-			modifier: 1,
-		},
-		{
-			name: "control 2",
-			modifier: 2,
-		},
-	],
-	base_price: 10,
-};
